@@ -9,6 +9,7 @@ const koaBody = require('koa-body');
 
 
 //path.resolve('./src/mock'); // mock目录地址
+
 const mockDirPath = './src/mock'; // mock目录地址
 const getAllFileOfDir = (mockDirPath) => {
     // 同步读取mock文件夹 
@@ -34,8 +35,15 @@ const getAllFileOfDir = (mockDirPath) => {
         //     // 将解析的结果推送到数组中
         //     console.log(result, 'result');
         // })
-        const file = require(`${mockDirPath}/${fileName}`);
-        Object.assign(mockBundle, file);
+
+        // 只读取JS文件
+        if (fileName.endsWith('.js')) {
+            const content = require(`${mockDirPath}/${fileName}`);
+            // 只合并对象
+            if (Object.prototype.toString.call(content) === '[object Object]') {
+                Object.assign(mockBundle, content);
+            }
+        }
     })
     return mockBundle;
 }
@@ -48,32 +56,44 @@ const app = new Koa();
 // koa插件，用来解析post请求的body
 app.use(koaBody());
 
+// 遍历mock数据
 // mock请求
-app.use(async (ctx, next) => {
-    // 遍历mock数据
-    for (let mock in mockBundle) {
-        // 解析请求类型和请求地址
-        let [type, fnName] = mock.split(' ');
+for (let mock in mockBundle) {
+    // 解析请求类型和请求地址
+    let [type, fnName] = mock.split(' ');
+    app.use(async (ctx, next) => {
         const isPathFit = ctx.path === fnName;
         const isTypeFit = ctx.method === type.toUpperCase();
         if (isPathFit && isTypeFit) {
-            let query;
-            if (ctx.method === 'GET') {
-                // 反序列化 get请求的参数
-                query = querystring.parse(ctx.querystring);
-            } else if (ctx.method === 'POST') {
-                query = ctx.request.body;
+            console.log(2222)
+            // TODO 容错
+            try {
+                let query;
+                if (ctx.method === 'GET') {
+                    // 反序列化 get请求的参数
+                    query = querystring.parse(ctx.querystring);
+                } else if (ctx.method === 'POST') {
+                    query = ctx.request.body;
+                }
+                // 返回mock结果
+                const response = mockBundle[mock](query);
+                return ctx.body = response;
+            } catch (error) {
+                ctx.status = 500;
+                return ctx.body = {
+                    error,
+                    msg: 'mock函数执行出错'
+                }
             }
-            // 返回mock结果
-            ctx.body = mockBundle[mock](query);
+        } else {
+            // 去下一个use咯
+            next();
         }
-    }
-    // 去下一个use咯
-    next();
-})
+    })
+}
 
 
-
+// 底线
 app.use(async ctx => {
     console.log(ctx.path, 'ctx.path')
     if (ctx.path === '/') {
@@ -90,6 +110,13 @@ app.use(async ctx => {
             </form>
         `;
         ctx.body = html;
+    } else {
+        let html = `
+            <h1>404</h1>
+            <h2>请确认URL是否正确</h2>
+        `;
+        ctx.status = 404;
+        ctx.body = html
     }
 })
 

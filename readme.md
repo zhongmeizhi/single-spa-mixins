@@ -12,13 +12,14 @@
 
         const mock = {
             'get /a/xx': (query) => {
-                // console.log(query)
+                // console.log(query);
                 return {
                     age: '16'
                 }
             },
             'POST /y/bb': (body) => {
-                console.log(body)
+                // console.log(body);
+                // 根据不同的请求类型来实现不同功能
 				if (body.xyz == 0) {
 					return {
 						sex: 'man'
