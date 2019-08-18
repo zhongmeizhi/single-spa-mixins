@@ -1,5 +1,6 @@
 const Koa = require('koa');
-const querystring = require('querystring');
+// const querystring = require('querystring'); // 解析?a=1&b=2的插件
+// Koa的ctx有解析get请求参数，但没有解析post请求参数
 const koaBody = require('koa-body');
 const loggerAsync = require('./src/middle/log.js');
 const getMockBundleOfDir = require('./src/utils/getMock.js');
@@ -28,8 +29,7 @@ app.use(async (ctx, next) => {
         if (mockType === '[object Function]') { // mock数据为函数
             let query;
             if (ctx.method === 'GET') {
-                // 反序列化 get请求的参数
-                query = querystring.parse(ctx.querystring);
+                query = ctx.query;
             } else if (ctx.method === 'POST') {
                 query = ctx.request.body;
             }
