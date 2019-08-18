@@ -26,13 +26,18 @@ const getMockBundleOfDir = (mockDirPath) => {
         //     console.log(result, 'result');
         // })
 
+        const filePtah = path.resolve(`${mockDirPath}/${fileName}`);
         // 只读取JS文件
         if (fileName.endsWith('.js')) {
-            const filePtah = path.resolve(`${mockDirPath}/${fileName}`);
-            const content = require(filePtah);
-            // 只合并对象
-            if (Object.prototype.toString.call(content) === '[object Object]') {
-                Object.assign(mockBundle, content);
+            // 容错，可能文件内容有问题
+            try {
+                const content = require(filePtah);
+                // 只合并对象
+                if (Object.prototype.toString.call(content) === '[object Object]') {
+                    Object.assign(mockBundle, content);
+                }
+            } catch (error) {
+                console.log('\033[41;37m', `读取${filePtah}文件出错`, '\033[0m');
             }
         }
     })

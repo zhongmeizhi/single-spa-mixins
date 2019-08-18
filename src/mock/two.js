@@ -1,5 +1,5 @@
 const mock = {
-    'get /b/yy': (query) => {
+    'GET /b/yy': (query) => {
         // console.log(query);
         return {
             age: '16'

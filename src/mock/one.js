@@ -1,10 +1,14 @@
 const mock = {
-    'get /a/xx': (query) => {
+    'GET /a/xx': (query) => {
         // console.log(query);
         return {
             name: 'zmz'
         }
-    }
+    },
+    'GET /a/yy': {
+        isObect: true
+    },
+    'GET /a/zz': 'test'
 }
 
 module.exports = mock;

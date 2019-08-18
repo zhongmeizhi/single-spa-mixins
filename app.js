@@ -7,48 +7,48 @@ const getMockBundleOfDir = require('./src/utils/getMock.js');
 //--------string_decoder，解决乱码问题，是一个node模块
 // let {StringDecoder} = require('string_decoder');
 
+const toString = Object.prototype.toString;
 const mockDirPath = './src/mock'; // mock目录地址
+
+// 获取mock对象集合
 let mockBundle = getMockBundleOfDir(mockDirPath);
 
 const app = new Koa();
-
 app.use(loggerAsync()) // 自己的log插件
 app.use(koaBody()); // koa插件，用来解析post请求的body
 
-// 遍历mock数据
-for (let mock in mockBundle) {
-    // 解析请求类型和请求地址
-    let [type, fnName] = mock.split(' ');
-    // mock请求
-    app.use(async (ctx, next) => {
-        const isPathFit = ctx.path === fnName;
-        const isTypeFit = ctx.method === type.toUpperCase();
-        if (isPathFit && isTypeFit) {
-            // TODO 容错
-            try {
-                let query;
-                if (ctx.method === 'GET') {
-                    // 反序列化 get请求的参数
-                    query = querystring.parse(ctx.querystring);
-                } else if (ctx.method === 'POST') {
-                    query = ctx.request.body;
-                }
-                // 返回mock结果
-                const response = mockBundle[mock](query);
-                return ctx.body = response;
-            } catch (error) {
-                ctx.status = 500;
-                return ctx.body = {
-                    error,
-                    msg: 'mock函数执行出错'
-                }
+// mock请求
+app.use(async (ctx, next) => {
+    // 对应mock的请求类型 + 空格 + 请求地址的映射
+    const request = `${ctx.method} ${ctx.path}`;
+    // TODO 容错
+    try {
+        const mock = mockBundle[request];
+        const mockType = toString.call(mock);
+        if (mockType === '[object Function]') { // mock数据为函数
+            let query;
+            if (ctx.method === 'GET') {
+                // 反序列化 get请求的参数
+                query = querystring.parse(ctx.querystring);
+            } else if (ctx.method === 'POST') {
+                query = ctx.request.body;
             }
-        } else {
-            // 去下一个use咯
-            next();
+            // 返回mock结果
+            const response = mock(query);
+            return ctx.body = response;
+        } else if (mock) { // 有值
+            return ctx.body = mock;
         }
-    })
-}
+    } catch (error) {
+        ctx.status = 500;
+        return ctx.body = {
+            error,
+            msg: 'mock函数执行出错'
+        }
+    }
+    // 找不到mock函数，那么next
+    next();
+})
 
 
 // 底线
@@ -70,7 +70,7 @@ app.use(async ctx => {
     } else {
         let html = `
             <h1>404</h1>
-            <h2>请确认URL是否正确</h2>
+            <h2>请确认URL是否正确、请求类型是否大写</h2>
         `;
         ctx.status = 404;
         ctx.body = html
