@@ -53,7 +53,6 @@ for (let mock in mockBundle) {
 
 // 底线
 app.use(async ctx => {
-    console.log(ctx.path, 'ctx.path')
     if (ctx.path === '/') {
         let html = `
             <h2>koa2 POST请求测试页面</h2>
@@ -84,5 +83,5 @@ app.on('error', err => {
 
 app.listen(3333, () => {
     // console.log(process.argv, 'argv')
-    console.log('> 开始运行 ', '端口3333')
+    console.log('\033[44;37m > 开始运行 ', '端口3333', '\033[0m');
 });
