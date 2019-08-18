@@ -1,71 +1,29 @@
 const Koa = require('koa');
-const fs = require('fs');
 const querystring = require('querystring');
 const koaBody = require('koa-body');
-// const path = require('path');
+const loggerAsync = require('./src/middle/log.js');
+const getMockBundleOfDir = require('./src/utils/getMock.js');
 
 //--------string_decoder，解决乱码问题，是一个node模块
 // let {StringDecoder} = require('string_decoder');
 
-
-//path.resolve('./src/mock'); // mock目录地址
-
 const mockDirPath = './src/mock'; // mock目录地址
-const getAllFileOfDir = (mockDirPath) => {
-    // 同步读取mock文件夹 
-    const fileNameList = fs.readdirSync(mockDirPath);
-    // mock对象汇总
-    let mockBundle = {};
-    // 遍历文件
-    fileNameList.forEach(fileName => {
-        // // 读取文件
-        // fs.readFile(`${mockDirPath}/${fileName}`, (err, data) => {
-        //     if (err) {
-        //         return console.error(err);
-        //     }
-        //     // 获取JSON数据
-        //     let result;
-        //     try {
-        //         // 将Buffer转字符串，再解析
-        //         result = JSON.parse(data.toString());
-        //     } catch (error) {
-        //         console.log('解析错误：', error)
-        //         result = {}
-        //     }
-        //     // 将解析的结果推送到数组中
-        //     console.log(result, 'result');
-        // })
-
-        // 只读取JS文件
-        if (fileName.endsWith('.js')) {
-            const content = require(`${mockDirPath}/${fileName}`);
-            // 只合并对象
-            if (Object.prototype.toString.call(content) === '[object Object]') {
-                Object.assign(mockBundle, content);
-            }
-        }
-    })
-    return mockBundle;
-}
-
-let mockBundle = getAllFileOfDir(mockDirPath);
-
+let mockBundle = getMockBundleOfDir(mockDirPath);
 
 const app = new Koa();
 
-// koa插件，用来解析post请求的body
-app.use(koaBody());
+app.use(loggerAsync()) // 自己的log插件
+app.use(koaBody()); // koa插件，用来解析post请求的body
 
 // 遍历mock数据
-// mock请求
 for (let mock in mockBundle) {
     // 解析请求类型和请求地址
     let [type, fnName] = mock.split(' ');
+    // mock请求
     app.use(async (ctx, next) => {
         const isPathFit = ctx.path === fnName;
         const isTypeFit = ctx.method === type.toUpperCase();
         if (isPathFit && isTypeFit) {
-            console.log(2222)
             // TODO 容错
             try {
                 let query;
