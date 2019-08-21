@@ -95,12 +95,12 @@
 
 PM2
 
-// npm install -g pm2
+> pm2 start app.js --watch 开启热重载
 
-// pm2 start app.js
+1. npm install -g pm2
+2. pm2 start app.js
+3. pm2 stop app.js
+4. pm2 stop all
 
-// pm2 stop app.js
-
-// pm2 stop all
 
 开启多进程
