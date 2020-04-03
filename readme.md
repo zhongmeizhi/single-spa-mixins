@@ -21,7 +21,12 @@
 
 ### 打包
 
-`npm run build:all`
+打包目录在`/dist`
+
+* 全部：`npm run build:all`（不推荐）
+* app1: `build:app1`
+* app2: `build:app2`
+* navbar: `build:navbar`
 
 ### 线上运行
 
