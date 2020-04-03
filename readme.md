@@ -1,4 +1,8 @@
-# Readme
+# Readme 咯
+
+> 这是一个以 Vue为主的 微前端项目，也是一个作者写轮子的地方。
+
+喜欢请 Star，请勿将该项目商用。
 
 ### 安装
 
@@ -24,4 +28,5 @@
 
 ### 内含轮子
 
-* [数据Mock服务](/z-mock/readme.md);
+[数据Mock服务](/z-mock/readme.md);
+  * 一个炒鸡方便，简单好用，易部署的 API Mock服务🔥
