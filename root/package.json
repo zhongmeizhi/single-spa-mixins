@@ -1,5 +1,5 @@
 {
-  "name": "root-html-file",
+  "name": "root",
   "scripts": {
     "serve": "serve -s -l 5000"
   },

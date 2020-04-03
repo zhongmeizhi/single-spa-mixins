@@ -12,7 +12,7 @@ help:
 
 .PHONY: install
 install: ## Install all dependencies
-	@pushd ./root-html-file >/dev/null && (npm install &) && popd >/dev/null
+	@pushd ./root >/dev/null && (npm install &) && popd >/dev/null
 	@pushd ./app1 >/dev/null && (npm install &) && popd >/dev/null
 	@pushd ./app2 >/dev/null && (npm install &) && popd >/dev/null
 	@pushd ./navbar >/dev/null && (npm install &) && popd >/dev/null
@@ -23,7 +23,7 @@ clean: ## Clean all endpoints
 
 .PHONY: start
 start: ## Start all endpoints
-	@pushd ./root-html-file >/dev/null && (npx serve -s -l $(port) &) && popd >/dev/null
+	@pushd ./root >/dev/null && (npx serve -s -l $(port) &) && popd >/dev/null
 	@pushd ./app1 >/dev/null && (npx vue-cli-service serve --port 8081 &) && popd >/dev/null
 	@pushd ./app2 >/dev/null && (npx vue-cli-service serve --port 8082 &) && popd >/dev/null
 	@pushd ./navbar >/dev/null && (npx vue-cli-service serve --port 8080 &) && popd >/dev/null

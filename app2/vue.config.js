@@ -1,5 +1,8 @@
-// Temporary until we can use https://github.com/webpack/webpack-dev-server/pull/2143
+const path = require('path');
+
 module.exports = {
+  outputDir: path.resolve(__dirname, '../dist/app2'),
+  // publicPath: '/app2',
   chainWebpack: config => {
     config.devServer.set('inline', false)
     config.devServer.set('hot', true)

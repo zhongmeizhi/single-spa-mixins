@@ -6,11 +6,12 @@
 
 ### 安装
 
-`npm run install-all`
+1. `npm i`
+2. `npm run install:all`
 
 ### 运行
 
-`npm run dev-all`
+`npm run dev:all`
 
 分别运行端口：
 * 主页面 `5000`
@@ -20,13 +21,20 @@
 
 ### 打包
 
-`npm run build-all`
+`npm run build:all`
+
+### 线上运行
+
+线上的环境一个设置线上的导入项目路径
+
+如果想尝试查看结果可以在打包后运行
+1. `npm run install:all`
+2. `node server.js`
 
 ### 审查
 
-`npm run audit-all`
+`npm run audit:all`
 
 ### 内含轮子
 
-[数据Mock服务](/z-mock/readme.md);
-  * 一个炒鸡方便，简单好用，易部署的 API Mock服务🔥
+* [数据Mock服务](/z-mock/readme.md)。一个炒鸡方便，简单好用，易部署的 API Mock服务
