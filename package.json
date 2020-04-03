@@ -1,6 +1,41 @@
 {
+  "name": "single-spa-mixins",
+  "version": "1.0.0",
+  "description": "微前端架构，内含各种轮子",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "concurrently \"npm run install-root\" \"npm run install-app1\" \"npm run install-app2\" \"npm run install-navbar\"",
+    "install-root": "cd root-html-file && npm install",
+    "install-app1": "cd app1 && npm install",
+    "install-app2": "cd app2 && npm install",
+    "install-navbar": "cd navbar && npm install",
+    "dev-all": "concurrently \"npm run dev-root\" \"npm run dev-app1\" \"npm run dev-app2\" \"npm run dev-navbar\"",
+    "dev-root": "cd root-html-file && npm run serve",
+    "dev-app1": "cd app1 && npm run serve",
+    "dev-app2": "cd app2 && npm run serve",
+    "dev-navbar": "cd navbar && npm run serve",
+    "audit-all": "concurrently \"npm run audit-root\" \"npm run audit-app1\" \"npm run audit-app2\" \"npm run audit-navbar\"",
+    "audit-root": "cd root-html-file && npm audit fix",
+    "audit-app1": "cd app1 && npm audit fix",
+    "audit-app2": "cd app2 && npm audit fix",
+    "audit-navbar": "cd navbar && npm audit fix",
+    "build-all": "concurrently \"npm run build-root\" \"npm run build-app1\" \"npm run build-app2\" \"npm run build-navbar\"",
+    "build-root": "cd root-html-file && npm run build",
+    "build-app1": "cd app1 && npm run build",
+    "build-app2": "cd app2 && npm run build",
+    "build-navbar": "cd navbar && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhongmeizhi/single-spa-mixins"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhongmeizhi/single-spa-mixins/issues"
+  },
+  "homepage": "https://github.com/zhongmeizhi/single-spa-mixins#readme",
   "dependencies": {
-    "koa": "^2.7.0",
-    "koa-body": "^4.1.1"
+    "concurrently": "^5.1.0"
   }
 }
