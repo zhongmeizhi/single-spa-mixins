@@ -6,8 +6,7 @@
 
 ### 安装
 
-1. `npm i`
-2. `npm run install:all`
+`npm run i:all`
 
 ### 运行
 

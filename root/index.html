@@ -30,30 +30,31 @@
   <body>
     <script>
       (function() {
-        Promise.all([System.import('single-spa'), System.import('vue'), System.import('vue-router')]).then(function (modules) {
-          var singleSpa = modules[0];
-          var Vue = modules[1];
-          var VueRouter = modules[2];
+        const microRouter = [
+          {
+            name: 'navbar',
+            showFn: () => true  
+          },
+          {
+            name: 'app1',
+            showFn: (location) => location.pathname.startsWith('/app1')  
+          },
+          {
+            name: 'app2',
+            showFn: (location) => location.pathname.startsWith('/app2')  
+          }
+        ];
+        const dependList = [System.import('single-spa'), System.import('vue'), System.import('vue-router')];
 
+        Promise.all(dependList).then(([singleSpa, Vue, VueRouter]) => {
           Vue.use(VueRouter)
-
-          singleSpa.registerApplication(
-            'navbar',
-            () => System.import('navbar'),
-            location => true
-          );
-
-          singleSpa.registerApplication(
-            'app1',
-            () => System.import('app1'),
-            location => location.pathname.startsWith('/app1')
-          )
-
-          singleSpa.registerApplication(
-            'app2',
-            () => System.import('app2'),
-            location => location.pathname.startsWith('/app2')
-          )
+          microRouter.forEach(({name, showFn}) => {
+            singleSpa.registerApplication(
+              name,
+              () => System.import(name),
+              showFn
+            );
+          })
 
           singleSpa.start();
         })
