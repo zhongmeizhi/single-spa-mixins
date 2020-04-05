@@ -1,7 +1,11 @@
-import Router from 'vue-router'
+import Vue from "vue";
+import VueRouter from 'vue-router'
 
-export default new Router({
-  mode: 'history',
+Vue.use(VueRouter);
+
+export default new VueRouter({
+  // mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes: [
     // {

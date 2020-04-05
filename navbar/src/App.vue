@@ -1,5 +1,5 @@
 <template>
-  <div id="navbar-app">
+  <div id="PageNav">
     这里是 Navbar
     <div id="nav">
       <router-link to="/app1">App1</router-link> |

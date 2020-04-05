@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --port 8085",
-    "build": "vue-cli-service build"
+    "dev": "vue-cli-service serve --port 8005 --mode dev",
+    "micro": "webpack-dev-server --port 8085",
+    "build": "webpack -p --progress"
   },
   "dependencies": {
     "core-js": "^3.4.3",
@@ -18,6 +19,7 @@
     "@vue/cli-plugin-router": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
     "vue-cli-plugin-single-spa": "^1.0.1",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "webpack-dev-server": "^3.10.3"
   }
 }

@@ -2,15 +2,30 @@
 
 > 这是一个以 Vue为主的 微前端项目，也是一个作者写轮子的地方。
 
-喜欢请 Star，请勿将该项目商用。
+
+### 本项目优点
+
+1. 既可以单独运行子项目，也可以聚合运行微前端
+2. 既可以单独打包子项目，也可以整体打包
+
+***
+
+项目任在持续迭代中... 喜欢请 Star，请勿将该项目商用。
 
 ### 安装
 
 `npm run i:all`
 
-### 运行
+### 子项目独立运行（方便开发）
 
-`npm run dev:all`
+* `npm run dev:app1` 端口：8005
+* `npm run dev:app2` 端口：8006
+* `npm run dev:navbar` 端口：8007
+
+### 微前端聚合运行
+
+1. `npm run micro:all`
+2. 打开 `http://localhost:5000/`
 
 分别运行端口：
 * 主页面 `5000`
@@ -22,18 +37,17 @@
 
 打包目录在`/dist`
 
-* 全部：`npm run build:all`（不推荐）
-* app1: `build:app1`
-* app2: `build:app2`
-* navbar: `build:navbar`
+* 全部：`npm run build:all`
+* root: `npm run build:root`
+* app1: `npm run build:app1`
+* app2: `npm run build:app2`
+* navbar: `npm run build:navbar`
 
-### 线上运行
+### 服务端运行打包结果
 
-线上的环境一个设置线上的导入项目路径
+1. `node server.js`
+2. 打开：`http://localhost:2345/#/`
 
-如果想尝试查看结果可以在打包后运行
-1. `npm run install:all`
-2. `node server.js`
 
 ### 审查
 

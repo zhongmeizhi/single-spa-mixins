@@ -1,7 +1,5 @@
 <template>
-  <div id="app2">
-    这里是 App2 项目
-    <p>comment me on and off to see HMR</p>
+  <div id="PageTwo">
     <router-view></router-view>
   </div>
 </template>

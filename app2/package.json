@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --port 8086",
-    "build": "vue-cli-service build"
+    "dev": "vue-cli-service serve --port 8006 --mode dev",
+    "micro": "webpack-dev-server --port 8086",
+    "build": "webpack -p --progress"
   },
   "dependencies": {
     "core-js": "^3.4.3",
