@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>Hello APP2</h1>
-    <router-link to="#/app2/about">App2 内部跳</router-link>
+    <router-link to="/app2/about">App2 内部跳</router-link>
   </div>
 </template>
 

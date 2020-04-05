@@ -7,11 +7,9 @@
 </template>
 
 <script>
-// import navbar from 'navbar';
 
 export default {
   mounted() {
-    // console.log(navbar, 'navbar')
   },
 }
 </script>
