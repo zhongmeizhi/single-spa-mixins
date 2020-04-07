@@ -10,6 +10,7 @@
 
 export default {
   mounted() {
+    console.log(this, 'xx')
   },
 }
 </script>

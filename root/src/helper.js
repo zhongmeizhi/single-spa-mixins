@@ -1,6 +1,12 @@
 import * as singleSpa from 'single-spa';
 
-const prefix = (prefix) => ({hash}) => hash.startsWith(`#${prefix}`);
+const prefix = (prefix) => ({hash}) => {
+    if (hash) {
+        return hash.startsWith(`#${prefix}`)
+    } else {
+        return true
+    }
+};
 
 export async function loadApp(name, hash, appURL, storeURL, globalBus) {
     let storeModule = {}, customProps = {globalBus: globalBus};
