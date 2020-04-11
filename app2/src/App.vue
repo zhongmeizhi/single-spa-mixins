@@ -4,6 +4,14 @@
   </div>
 </template>
 
+<script>
+export default {
+  mounted() {
+    console.log($define, '$define')
+  },
+}
+</script>
+
 <style>
 #app2 {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

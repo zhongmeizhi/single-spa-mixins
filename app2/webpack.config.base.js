@@ -1,18 +1,11 @@
 const path = require('path');
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const webpack = require('webpack');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const defineConfig = require("./config/index.js");
 
-const library = 'app2';
+const { LIBRARY } = defineConfig;
 
 module.exports = {
-  entry: {
-    micro: 'src/micro.js'
-  },
-  output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, '../dist', library),
-    libraryTarget: 'umd',
-    library: library
-  },
   module: {
     rules: [
       {
@@ -27,14 +20,14 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]',
-          publicPath: `/${library}/`,
+          publicPath: `/${LIBRARY}/`,
         }
       },
       {
@@ -49,6 +42,7 @@ module.exports = {
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
       'vue$': 'vue/dist/vue.esm.js'
     },
     extensions: [
@@ -64,6 +58,9 @@ module.exports = {
   externals: [
   ],
   plugins: [
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new webpack.DefinePlugin({
+      $define: defineConfig.define
+    }),
   ],
 };

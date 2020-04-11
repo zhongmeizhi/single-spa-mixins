@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "vue-cli-service serve --port 8006 --mode dev",
-    "micro": "webpack-dev-server --port 8086",
-    "build": "webpack -p --progress"
+    "cli-serve": "vue-cli-service serve --port 8006 --mode dev",
+    "cli-build": "vue-cli-service build --mode production",
+    "dev": "cross-env NODE_ENV=dev webpack-dev-server --port 8006--config webpack.config.dev.js",
+    "micro": "cross-env NODE_ENV=micro webpack-dev-server --port 8086 --config webpack.config.micro.js",
+    "build": "cross-env NODE_ENV=prod webpack -p --progress --config webpack.config.prod.js"
   },
   "dependencies": {
     "core-js": "^3.4.3",
@@ -18,8 +20,13 @@
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-router": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
+    "cross-env": "^7.0.2",
+    "html-webpack-plugin": "^4.2.0",
+    "vconsole-webpack-plugin": "^1.5.1",
     "vue-cli-plugin-single-spa": "^1.0.1",
     "vue-template-compiler": "^2.6.10",
-    "webpack-dev-server": "^3.10.3"
+    "webpack": "^4.42.1",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2"
   }
 }

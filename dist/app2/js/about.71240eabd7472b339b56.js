@@ -1,0 +1,1 @@
+(window.webpackJsonpapp2=window.webpackJsonpapp2||[]).push([[0],{47:function(t,e,n){"use strict";n.r(e);var s=n(1),a=Object(s.a)({},(function(){var t=this.$createElement;this._self._c;return this._m(0)}),[function(){var t=this.$createElement,e=this._self._c||t;return e("div",{staticClass:"about"},[e("h1",[this._v("这个是Mokou的微前端项目")])])}],!1,null,null,null);e.default=a.exports}}]);

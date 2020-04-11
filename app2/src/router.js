@@ -6,9 +6,13 @@ Vue.use(VueRouter);
 
 export default new VueRouter({
   // mode: 'history',
+  // base: $define.BASE_URL,
   mode: 'hash',
-  base: process.env.BASE_URL,
   routes: [
+    {
+      path: '/',
+      redirect: '/app2'
+    },
     {
       path: '/app2',
       name: 'home',

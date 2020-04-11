@@ -64,7 +64,7 @@ module.exports = {
 			},
 			"/navbar": {
 				target: "http://localhost:8087",
-				pathRewrite: { "^/navbar": "" }
+				pathRewrite: { "/navbar": "" }
 			}
 		}
 	}
