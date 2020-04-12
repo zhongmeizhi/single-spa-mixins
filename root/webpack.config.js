@@ -37,16 +37,16 @@ module.exports = {
 			{ from: path.resolve(__dirname, 'src/style.css') },
 			{ from: path.resolve(__dirname, 'libs/system.js') },
 		]),
-		new CleanWebpackPlugin(['release'])
+		// new CleanWebpackPlugin(['dist'])
 	],
 	devtool: 'source-map',
 	externals: [
 	],
 	mode: 'development',
 	devServer: {
-		contentBase: './release',
-		historyApiFallback: true,
-		watchOptions: { aggregateTimeout: 300, poll: 1000 },
+		// contentBase: './dist',
+		// historyApiFallback: true,
+		// watchOptions: { aggregateTimeout: 300, poll: 1000 },
 		headers: {
 			"Access-Control-Allow-Origin": "*",
 			"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
@@ -56,15 +56,15 @@ module.exports = {
 		proxy: {
 			"/app1": {
 				target: "http://localhost:8085",
-				pathRewrite: { "^/app1": "" }
+				// pathRewrite: { "^/app1": "" }
 			},
 			"/app2": {
 				target: "http://localhost:8086",
-				pathRewrite: { "^/app2": "" }
+				// pathRewrite: { "^/app2": "" }
 			},
 			"/navbar": {
 				target: "http://localhost:8087",
-				pathRewrite: { "/navbar": "" }
+				// pathRewrite: { "/navbar": "" }
 			}
 		}
 	}
