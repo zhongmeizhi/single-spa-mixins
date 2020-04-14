@@ -5,9 +5,7 @@ import singleSpaVue from 'single-spa-vue';
 
 Vue.config.productionTip = false;
 
-console.log('app2 微服务启动')
-
-const id = 'app2';
+const id = $define.NAME;
 
 const vueLifecycles = singleSpaVue({
   Vue,
@@ -31,6 +29,7 @@ function createDomElement() {
 export const bootstrap = vueLifecycles.bootstrap;
 
 export function mount(props) {
+  console.log(id, '启动')
   createDomElement();
   return vueLifecycles.mount(props);
 }

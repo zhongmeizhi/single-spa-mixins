@@ -7,7 +7,7 @@
 <script>
 export default {
   mounted() {
-    console.log($define, '$define')
+    // console.log($define, '$define')
   },
 }
 </script>

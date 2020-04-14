@@ -1,18 +1,20 @@
+const NAME = 'app1';
+
 const define = {
   dev: {
-    BASE_URL: JSON.stringify("/app1/")
+    NAME: JSON.stringify(NAME)
   },
   micro: {
-    BASE_URL: JSON.stringify("/app1/")
+    NAME: JSON.stringify(NAME)
   },
   prod: {
-    BASE_URL: JSON.stringify("/app1/")
+    NAME: JSON.stringify(NAME)
   },
 }
 
 const { NODE_ENV } = process.env;
 
 module.exports = {
-  LIBRARY: "app1",
+  LIBRARY: NAME,
   define: define[NODE_ENV]
 };

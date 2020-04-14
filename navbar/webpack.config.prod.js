@@ -17,6 +17,7 @@ module.exports = merge(baseConf, {
     libraryTarget: 'umd',
     library: LIBRARY
   },
+  // externals: ['vue', 'vue-router'],
   plugins: [
   ],
 })
