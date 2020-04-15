@@ -16,10 +16,10 @@ export class GlobalBus {
 		}
 	}
 
-	emit(name) {
+	emit(name, ...args) {
 		let fnPools = this.globalBus[name];
 		if (fnPools) {
-			fnPools.forEach(fn => fn());
+			fnPools.forEach(fn => fn.apply(fn, args));
 		}
 	}
 

@@ -13,8 +13,8 @@ export default {
     window.globalBus.on('test', this.testSignal)
   },
   methods: {
-    testSignal() {
-      console.log($define.NAME, ' 收到通信')
+    testSignal(...args) {
+      console.log($define.NAME, ' 收到通信', args)
     }
   },
   destroyed() {

@@ -14,7 +14,7 @@
 export default {
   methods: {
     emitTest() {
-      window.globalBus.emit('test')
+      window.globalBus.emit('test', 1, '2', Date.now())
     }
   },
 }
