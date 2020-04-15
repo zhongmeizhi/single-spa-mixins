@@ -11,9 +11,6 @@ const vueLifecycles = singleSpaVue({
   Vue,
   appOptions: {
     el: `#${id}`,
-    mounted(props) {
-      console.log(props, '111')
-    },
     render: (h) => h(App),
     router,
   },
@@ -31,22 +28,11 @@ function createDomElement() {
 
 export const bootstrap = vueLifecycles.bootstrap;
 
-export function mount(props) {
-  console.log(id, '启动');
-  console.log(props,'mount props');
-  // SystemJS.resolve('@common/app1').then(values => {
-  //   const [url] = values
-  //   const webpackPublicPath = url.slice(0, url.lastIndexOf('/') + 1)
-
-  //   __webpack_public_path__ = webpackPublicPath
-  //   return true
-  // }).then(res => {
-  //   SystemJS.import('@common/app1').then(res => {
-  //     console.log(rex, '@common/app1')
-  //   })
-  // })
+export  async function mount(props) {
   createDomElement();
-  return vueLifecycles.mount(props)
+  const instance = await vueLifecycles.mount(props)
+  console.log(instance, 'instance')
+  return instance
 }
 
 export const unmount = vueLifecycles.unmount;

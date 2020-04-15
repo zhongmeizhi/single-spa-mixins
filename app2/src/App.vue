@@ -7,7 +7,15 @@
 <script>
 export default {
   mounted() {
-    // console.log($define, '$define')
+    window.globalBus.on('test', this.testSignal)
+  },
+  methods: {
+    testSignal() {
+      console.log($define.NAME, ' 收到通信')
+    }
+  },
+  destroyed() {
+    window.globalBus.destroy('test', this.testSignal)
   },
 }
 </script>

@@ -29,7 +29,6 @@ function createDomElement() {
 export const bootstrap = vueLifecycles.bootstrap;
 
 export function mount(props) {
-  console.log(id, '启动')
   createDomElement();
   return vueLifecycles.mount(props);
 }

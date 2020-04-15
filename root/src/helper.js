@@ -8,19 +8,6 @@ const prefix = (prefix) => ({hash}) => {
     }
 };
 
-export async function loadApp(name, hash, appURL, storeURL, globalBus) {
-    let storeModule = {}, customProps = {globalBus: globalBus};
-
-    try {
-        storeModule = storeURL ? await SystemJS.import(storeURL) : {storeInstance: null};
-    } catch (e) {
-        console.log(`Could not load store of app ${name}.`, e);
-    }
-
-    if (storeModule.storeInstance && globalBus) {
-        customProps.store = storeModule.storeInstance;
-        globalBus.registerStore(storeModule.storeInstance);
-    }
-
+export async function loadApp(name, hash, appURL, customProps) {
     singleSpa.registerApplication(name, () => SystemJS.import(appURL), prefix(hash), customProps);
 }

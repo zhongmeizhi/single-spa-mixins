@@ -4,10 +4,21 @@
     <div id="nav">
       <router-link to="/app1">App1</router-link> |
       <router-link to="/app2">App2</router-link>
+      <button @click="emitTest">测试通信</button>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    emitTest() {
+      window.globalBus.emit('test')
+    }
+  },
+}
+</script>
 
 <style>
 #navbar-app {

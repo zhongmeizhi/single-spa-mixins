@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "core-js": "^3.4.3",
-    "single-spa-vue": "^1.5.4",
+    "single-spa-vue": "^1.8.2",
     "systemjs-webpack-interop": "^1.1.2",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3"
