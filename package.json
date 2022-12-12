@@ -46,7 +46,7 @@
     "babel-core": "6.26.3",
     "babel-loader": "8.0.0",
     "concurrently": "^5.1.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
   }
