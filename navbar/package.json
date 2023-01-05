@@ -19,7 +19,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-router": "^4.1.0",
-    "@vue/cli-service": "^4.1.0",
+    "@vue/cli-service": "^5.0.8",
     "cross-env": "^7.0.2",
     "html-webpack-plugin": "^4.2.0",
     "vconsole-webpack-plugin": "^1.5.1",
